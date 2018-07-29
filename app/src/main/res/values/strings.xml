@@ -4,6 +4,7 @@
     <string name="label_error_text">Error</string>
     <string name="base">Base Currency</string>
     <string name="imageview_desc">Bitcoin Logo</string>
+    <string name="filler_text">Filler text</string>
 
     <string-array name="currency_array">
         <item>AUD</item>
