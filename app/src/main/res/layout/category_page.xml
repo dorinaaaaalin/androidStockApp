@@ -10,11 +10,12 @@
         android:id="@+id/textView"
         android:layout_width="300dp"
         android:layout_height="60dp"
-        android:fontFamily="@font/atomic_age"
+        android:fontFamily="@font/pt_serif_font_family"
         android:text="@string/category_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textColor="#616161"
         android:textSize="40sp"
+        android:textStyle="bold"
         android:layout_marginLeft="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"/>
