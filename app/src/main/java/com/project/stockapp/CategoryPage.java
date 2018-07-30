@@ -3,6 +3,7 @@ package com.project.stockapp;
 import android.app.Application;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -12,11 +13,23 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ListView;
 
+import com.amazonaws.auth.AWSCredentialsProvider;
+import com.amazonaws.mobile.auth.core.IdentityHandler;
+import com.amazonaws.mobile.auth.core.IdentityManager;
+import com.amazonaws.mobile.client.AWSMobileClient;
+import com.amazonaws.mobile.client.AWSStartupHandler;
+import com.amazonaws.mobile.client.AWSStartupResult;
+import com.amazonaws.mobile.config.AWSConfiguration;
+
 import org.w3c.dom.Text;
 
 public class CategoryPage extends AppCompatActivity{
 
+    //aws class var
+    private AWSCredentialsProvider credentialsProvider;
+    private AWSConfiguration configuration;
 
+    //TODO: can you move the arrays to the string xml file?
     int[] IMAGES = {R.drawable.basicmaterials, R.drawable.industrialgoods
             , R.drawable.financial, R.drawable.conglomerates
             , R.drawable.services, R.drawable.utilities
@@ -36,6 +49,38 @@ public class CategoryPage extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //configuring aws backend
+        AWSMobileClient.getInstance().initialize(this, new AWSStartupHandler() {
+            @Override
+            public void onComplete(AWSStartupResult awsStartupResult) {
+                Log.d("StockApp", "AWSMobileClient is instantiated and you are connected to AWS!");
+
+                // Obtain the reference to the AWSCredentialsProvider and AWSConfiguration objects
+                credentialsProvider = AWSMobileClient.getInstance().getCredentialsProvider();
+                configuration = AWSMobileClient.getInstance().getConfiguration();
+
+                // Use IdentityManager#getUserID to fetch the identity id.
+                IdentityManager.getDefaultIdentityManager().getUserID(new IdentityHandler() {
+                    @Override
+                    public void onIdentityId(String identityId) {
+                        Log.d("StockApp", "Identity ID = " + identityId);
+
+                        // Use IdentityManager#getCachedUserID to
+                        //  fetch the locally cached identity id.
+                        final String cachedIdentityId =
+                                IdentityManager.getDefaultIdentityManager().getCachedUserID();
+                    }
+
+                    @Override
+                    public void handleError(Exception exception) {
+                        Log.d("StockApp", "Error in retrieving the identity" + exception);
+                    }
+                });
+            }
+
+        }).execute();
+
         setContentView(R.layout.category_page);
 
         ListView listView= (ListView) findViewById(R.id.listView);
