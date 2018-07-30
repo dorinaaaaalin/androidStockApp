@@ -1,42 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/bkgndColour"
     tools:context="com.project.stockapp.MainActivity">
 
     <TextView
+        android:id="@+id/priceLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/label_default_text"
-        android:id="@+id/priceLabel"
-        android:textSize="45sp"
-        android:textStyle="bold"
-        android:textColor="@color/fontColour"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:textColor="@color/fontColour"
+        android:textSize="45sp"
+        android:textStyle="bold" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/logoImage"
-        android:contentDescription="@string/imageview_desc"
-        android:src="@drawable/bitcoin_image"
+        android:layout_width="wrap_content"
+        android:layout_height="426dp"
+        android:layout_alignParentEnd="true"
+
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="39dp"
+        android:contentDescription="@string/imageview_desc"
+        android:src="@drawable/stock_app_logo" />
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/priceLabel"
-        android:gravity="center_vertical|center_horizontal">
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/textView"
@@ -45,6 +47,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:layout_marginTop="25dp"
             android:text="@string/filler_text"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="30sp"
@@ -54,11 +57,24 @@
             android:id="@+id/go_get_it_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
             android:layout_weight="1"
             android:autoText="true"
             android:text="Go Get it" />
 
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="304dp"
+        android:layout_height="70dp"
+        android:layout_alignTop="@+id/logoImage"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/pt_serif_font_family"
+        android:text="Stock Prophet"
+        android:textSize="40dp"
+        android:textStyle="bold" />
+
 
 </RelativeLayout>
